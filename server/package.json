@@ -6,11 +6,12 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "server":"nodemon server"
+    "server": "nodemon server"
   },
   "author": "Pradipkumar Hinge",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.2",
     "express": "^4.17.1",
