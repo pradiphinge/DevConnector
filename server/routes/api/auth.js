@@ -34,7 +34,7 @@ router.post('/', [
     ],
     async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
+    
     if (!errors.isEmpty()) {
         return res.status(400).json({
             success: false,
@@ -55,7 +55,7 @@ router.post('/', [
             }    
             
             //decrypt password
-            const isMatch = bcrypt.compare(password,user.password)
+            const isMatch = await bcrypt.compare(password,user.password)
             if (!isMatch) {
                 return res.status(401).json({
                     success: false,
