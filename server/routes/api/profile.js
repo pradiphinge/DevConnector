@@ -5,6 +5,8 @@ import config from 'config';
 
 import Profile from '../../models/Profile.js';
 import User from '../../models/User.js';
+import Post from '../../models/Post.js';
+
 import auth from '../middlewares/auth.js'
 
 const {check,validationResult} = validator
@@ -167,8 +169,8 @@ router.get('/user/:user_id',  async (req, res) => {
 
 router.delete('/',auth, async (req, res) => {
     try {
-        //@todo    - remove user posts
-
+        //remove user posts
+        await Post.deleteMany({user:req.user.id})
         // remove profile
         await Profile.findOneAndDelete({ user:req.user.id });
         // remove user

@@ -19,7 +19,7 @@ const authenticateUser = (req, res, next) => {
         next();
     } catch (err) {
         res.status(401).json({
-            msg:'Token is not valid'
+            msg:'Invalid Token. Try login.'
         })
     }
 }

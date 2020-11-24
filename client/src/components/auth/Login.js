@@ -4,8 +4,9 @@ import { Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../actions/auth'
+import {setAlert} from '../../actions/alert'
 
-const Login = ({login,isAuthenticated}) => {
+const Login = ({setAlert,login,isAuthenticated}) => {
     const [formData, setFormData] = useState({
 
         email: '',
@@ -18,7 +19,10 @@ const Login = ({login,isAuthenticated}) => {
       }
       const onSubmit = (e) => {
         e.preventDefault();
-         login(formData);
+        if (!email || !password)
+          setAlert('Please provide both email and password','danger')
+         else
+          login(formData);
         
       }
       if(isAuthenticated)    
@@ -61,4 +65,4 @@ const mapStateToProps = state => ({
   isAuthenticated : state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps,{login})(Login);
+export default connect(mapStateToProps,{setAlert,login})(Login);

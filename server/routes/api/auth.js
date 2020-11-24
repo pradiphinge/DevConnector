@@ -18,6 +18,12 @@ router.get('/',auth,async (req, res) => {
         console.log(req.user);
         const user = await User.findById(req.user.id).select('-password');
         console.log(user);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                error:{msg:'The requested user is not found !'}
+            })
+        }
         res.status(200).json(user);
     } catch (err) {
         console.error(err);
