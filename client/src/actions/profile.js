@@ -45,7 +45,7 @@ export const getProfileById = (userId) => async dispatch => {
         const res = await api.get(`/profile/user/${userId}`);
         dispatch({
             type: GET_PROFILE,
-            payload:res.data
+            payload:res.data.profile
         })
        
     } catch (err) {
