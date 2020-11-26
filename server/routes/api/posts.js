@@ -134,7 +134,7 @@ router.put('/like/:id', auth, async (req, res) => {
         }
         //check if user is trying to like own post
         if (post.user.toString() === req.user.id) {
-            return res.status(401).json({
+            return res.status(400).json({
                 msg:'No need to like it yourself!'
             })
         }
@@ -147,7 +147,7 @@ router.put('/like/:id', auth, async (req, res) => {
         // add user to likes array
         post.likes.unshift({ user: req.user.id })
         await post.save();
-        res.status(201).json(post)
+        res.status(201).json(post.likes)
     } catch (err) {
         console.error(err);
         if (err.kind === 'ObjectId') {
@@ -182,12 +182,15 @@ router.put('/unlike/:id', auth, async (req, res) => {
                 msg:'Post is yet to be liked.'
             })
         }
-        // remove user from likes array
-        const removeIndex = post.likes.map(like => like.user.id.toString()).indexOf(req.user.id)
-        post.likes.splice(removeIndex, 1);
-        //save new post
-        await post.save();
-        res.status(201).json(post)
+       
+        // remove the like
+        post.likes = post.likes.filter(
+        ({ user }) => user.toString() !== req.user.id
+      );
+  
+      await post.save();
+  
+      return res.json(post.likes);
     } catch (err) {
         console.error(err);
         if (err.kind === 'ObjectId') {
@@ -227,7 +230,7 @@ router.post('/comment/:post_id', [auth,
          }
          post.comments.unshift(newComment);
          await post.save();
-         res.status(201).json(post)
+         res.status(201).json(post.comments)
 
      } catch (err) {
          console.error(err);
@@ -257,9 +260,7 @@ router.delete('/comment/:post_id/:comment_id', auth, async (req, res) => {
         post.comments.splice(removeIndex, 1);
         await post.save();
 
-        res.status(200).json({
-            post
-        })
+        res.status(200).json(post.comments);
     } catch (err) {
         if (err.kind === 'ObjectId') {
             return res.status(404).json({

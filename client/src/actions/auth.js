@@ -1,5 +1,5 @@
 
-import { REGISTER_FAIL, REGISTER_SUCCESS,LOGOUT,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL,CLEAR_PROFILE } from './types'
+import { REGISTER_FAIL, REGISTER_SUCCESS,LOGOUT,USER_LOADED,AUTH_ERROR,LOGIN_SUCCESS,LOGIN_FAIL } from './types'
 import api from '../utils/api'
 import {setAlert} from './alert'
 
@@ -69,7 +69,5 @@ export const login = (formData) => async dispatch => {
   };
   
   // Logout
-export const logout = () => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
-  dispatch({ type: LOGOUT });
-}
+export const logout = () => ({ type: LOGOUT });
+

@@ -36,7 +36,7 @@ const register = (state = initialState, action)=>{
             loading: false,
             user: null
         };
-        default:return state    
+        default: return state;   
     }
 }
 

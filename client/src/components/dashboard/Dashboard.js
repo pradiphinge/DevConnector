@@ -9,7 +9,7 @@ import DashboardActions from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
 
-const Dashboard = ({ getCurrentProfile,deleteAccount, auth: { isAuthenticated,user}, profile:{loading,profile} }) => {
+const Dashboard = ({ getCurrentProfile,deleteAccount, auth: { user}, profile:{loading,profile} }) => {
 
     useEffect(() => {
         getCurrentProfile()
@@ -47,12 +47,11 @@ Dashboard.propTypes = {
     auth: PropTypes.object.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
 }
 const mapStateToProps = state => ({
     auth: state.auth,
     profile: state.profile,
-    getCurrentProfile: PropTypes.func.isRequired,
-    deleteAccount: PropTypes.func.isRequired,
 })
 
 export default connect(mapStateToProps,{getCurrentProfile,deleteAccount})(Dashboard)

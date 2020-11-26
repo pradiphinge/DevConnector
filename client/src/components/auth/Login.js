@@ -25,9 +25,9 @@ const Login = ({setAlert,login,isAuthenticated}) => {
           login(formData);
         
       }
-      if(isAuthenticated)    
+       if (isAuthenticated) {
         return <Redirect to='/dashboard' />
-  
+    }  
         return (
             <Fragment>
               <h1 className="large text-primary">Sign In</h1>
@@ -59,6 +59,7 @@ const Login = ({setAlert,login,isAuthenticated}) => {
 
 Login.propTypes= {
   login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
