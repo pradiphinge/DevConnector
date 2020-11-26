@@ -55,7 +55,8 @@ const post = (state = initialState, action) => {
             post: {
                 ...state.post,
                 comments:state.post.comments.filter(comment => comment._id !== payload),
-            }
+            },
+            loading:false
         }
         default: return state;
 
