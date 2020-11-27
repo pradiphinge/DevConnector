@@ -1,0 +1,7 @@
+{
+    "MONGO_URI" : "mongodb+srv://mern_tracker:xcRv2bwTLpVWXBxp@sandbox.ps7uw.mongodb.net/devconnector?retryWrites=true&w=majority",
+    "NODE_ENVIRONMENT" : "production",
+    "jwtSecret":"mySecret123jwt",
+    "githubClientId":"656bba865b265221455a",
+    "githubSecret":"64e9e960d31535c75a8cf8ce51df0fcf564d2d36"
+    }
